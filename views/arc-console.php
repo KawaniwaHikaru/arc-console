@@ -57,11 +57,11 @@ $filterQuery = $_REQUEST['filter']['query'];
 $running = daemonCheck();
 $status = $running?$SLANG['Running']:$SLANG['Stopped'];
 
-if ( $group = dbFetchOne( "select * from Groups where Id = '".(empty($_COOKIE['zmGroup'])?0:dbEscape($_COOKIE['zmGroup']))."'" ) )
+if ( $group = dbFetchOne( "select * from Groups where Id = ".(empty($_COOKIE['zmGroup'])?0:dbEscape($_COOKIE['zmGroup']))."" ) )
     $groupIds = array_flip(explode( ',', $group['MonitorIds'] ));
 
 $sqlQuery = "SELECT * FROM Monitors";
-$sqlQuery .= " WHERE Function IN ( 'Modect', 'Monitor' ) AND Enabled";
+$sqlQuery .= " WHERE Function IN ( 'Modect', 'Monitor' , 'Mocord') AND Enabled";
 $sqlQuery .= " ORDER BY Sequence ASC";
 
 $monitors = dbFetchAll( $sqlQuery );
